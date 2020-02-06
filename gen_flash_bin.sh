@@ -1,7 +1,7 @@
 #!/bin/bash
 #set -x
 
-PROJ_ROOT=$PWD
+PROJ_ROOT=`pwd`
 PATH_FLASH_TOOL=$PROJ_ROOT/flash_tool_win
 PATH_UTILS=$PROJ_ROOT/utils
 PATH=$PATH:$PATH_FLASH_TOOL:$PATH_UTILS
@@ -25,9 +25,9 @@ PROG_KEEP_CAL_OFFSET=0x0
 PROG_AUTO_RESET=false
 
 pushd $PATH_FLASH_TOOL
-cp $PATH_ROOT/ota.bin $PATH_ROOT/ram_all.bin -r .
+cp $PROJ_ROOT/ota.bin $PROJ_ROOT/ram_all.bin -r .
 cmd "/C 7z x JLink_V494.7z"
 # generate flash images
 ImageTool.exe -generate dftimg=$DFT_IMG otaimg=$OTA_IMG,offset=$OTA_IMG_OFFSET calimg=$CAL_IMG outimg=$OUT_IMG dftboot=$DFT_BOOT
-cp $OUT_IMG -r $PATH_ROOT
+cp $OUT_IMG -r $PROJ_ROOT
 popd
